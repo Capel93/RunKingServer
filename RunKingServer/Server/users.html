@@ -17,50 +17,55 @@
     <div id="header">
 	  <div id="banner">
 	    <div id="welcome">
-	      <h1>Runking App</h1>
+	      <h1>Blue Skies</h1>
 	    </div><!--close welcome-->
 	    <div id="welcome_slogan">
-	      <h1>Server service</h1>
+	      <h1>Your Company Slogan Here</h1>
 	    </div><!--close welcome_slogan-->
 	  </div><!--close banner-->
     </div><!--close header-->
 
 	<div id="menubar">
       <ul id="menu">
-        <li class="current"><a href="index.html">Home</a></li>
-        <li><a href="routes">Routes</a></li>
-        <li><a href="users">friends</a></li>
-
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ourwork.html">Our Work</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li class="current"><a href="users.html">Projects</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
-    </div><!--close menubar-->	
-    
-	<div id="site_content">		
+    </div><!--close menubar-->
 
-	  <div class="sidebar_container">       
-		<div class="sidebar">
-          <div class="sidebar_item">
-            <h2>Profile</h2>
-            <p></p>
-          </div><!--close sidebar_item--> 
-        </div><!--close sidebar-->
-       </div><!--close sidebar_container-->
-	
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <table class="table table-striped" style="width:100%; text-align:center;">
+          <thead>
+          <tr>
+            <th style="width:20%;">ID</th>
+            <th style="width:10%;">UserName</th>
+            <th style="width:20%;">Email</th>
 
-	 
-	  <div id="content">
-        <div class="content_item">
-		  <h1>Welcome To Your Website</h1> 
+            <th style="width:10%;"></th>
+          </tr>
+          </thead>
+          {{#content.items}}
+          <tbody>
+          <tr>
+            <td>{{_id}}</td>
+            <td>{{username}}</td>
+            <td>{{email}}</td>
+          </tr>
+          </tbody>
+          {{/content.items}}
+        </table>
+        <br/><br/><br/>
+        <hr/>
 
-		</div><!--close content_item-->
-      </div><!--close content-->   
-	</div><!--close site_content--> 
-    
-
-  </div><!--close main-->
+      </div>
+    </div>
   
   <div id="footer">
 	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | <a href="http://www.heartinternet.co.uk/vps/">Virtual Server</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a>
-  </div><!--close footer-->  
-  
+  </div><!--close footer-->
+  </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require("body-parser");
 var http = require('http');
 var mongoose = require('mongoose');
+var mustacheExpress = require('mustache-express');
 
 var fs = require('fs');
 var jade = require('jade');
@@ -11,10 +12,13 @@ var session = require('client-sessions');
 var app = express();
 
 
-
 // =================================================================
 // configuration ===================================================
 // =================================================================
+app.engine('mustache', mustacheExpress());
+app.set('view engine','mustache');
+app.set('views',__dirname + '/views');
+
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // for parsing application/json
@@ -62,16 +66,16 @@ app.get('/login', function (req, res) {
 
 
 app.post('/login', function(req, res) {
-    User.find({ username: req.body.username }, function(err, user) {
+    User.findOne({ email: req.body.email }, function(err, user) {
         if (err) {
             res.render('login', { error: 'Invalid email or password.' });
         } else {
             if (req.body.password === user.password) {
                 // sets a cookie with the user's info
-                sessionUser = user[0];
+
                 res.redirect('/home');
             } else {
-                res.render('login', { error: 'Invalid email or password.' });
+                //res.render('login', { error: 'Invalid email or password.' });
             }
         }
     });
@@ -135,12 +139,22 @@ app.get('/users',function (req,res) {
     if(req.get('content-type') == 'application/json'){
 
     }else{
-        User.find({username: sessionUser.username}, function (err, users) {
-            if (err) throw err;
-            //console.log(user.username);
-            // object of all the users
-            console.log(users[0]);
-            res.json(users[0].friends);
+        res.format({
+            'text/html': function(){
+                User.find({}, function(err, item){
+                    res.render('users',{
+                        head: {
+                            title:'RUNKING'
+                        },
+                        content: {
+                            title: 'Users',
+                            description: 'Test',
+                            items: item,
+
+                        }
+                    });
+                });
+            }
         });
     }
 
@@ -164,20 +178,25 @@ app.get('/users/:email', function (request, response) {
             sessionUser = user;
         });
     }else{
-        var email = request.params.email;
-        try {
-            //response.json(userRepository.find(userId));
-            User.find({email: email}, function(err, user) {
-                if (err) throw err;
+        response.format({
+            'text/html': function(){
+                Route.findOne({email:request.params.email}, function(err, item){
+                    response.render('user',{
+                        head: {
+                            title:'RUNKING'
+                        },
+                        content: {
+                            title: 'user',
+                            description: 'Test',
+                            items: item,
 
-                // show the one user
-                console.log(user);
-                response.json(user);
-            });
+                        }
+                    });
+                });
+            }
+        });
 
-        } catch (exeception) {
-            response.send(404);
-        }
+
     }
 
 });
@@ -224,9 +243,11 @@ app.post('/users', function (request, response) {
             console.log('User created!');
         });
 
-    }
-    //response.sendStatus(200);
-    response.redirect('/home');
+    };
+
+
+
+
 });
 
 
@@ -289,28 +310,72 @@ app.get('/routes/:email',function (req,res) {
 
 });
 
-app.get('/routes.html',function (req,res) {
-    res.sendFile("/home/joanmarc/Escritorio/Arquitectura/RunKingServer/RunKingServer/Server/routes.html")
+app.get('/users.html',function (req,res) {
+    res.sendFile("/home/joanmarc/Escritorio/Arquitectura/RunKingServer/RunKingServer/Server/users.html")
 })
 
-app.get('/routes/:id', function (request, response) {
-    var routesId = request.params.id;
-    try {
-        response.json(taskRepository.find(routesId));
-    } catch (exeception) {
-        response.send(404);
+app.get('/routes/id/:id', function (request, response) {
+    if(request.get('content-type') == 'application/json') {
+        var routesId = request.params.id;
+        try {
+            response.json(taskRepository.find(routesId));
+        } catch (exeception) {
+            response.send(404);
+        }
+    }else{
+        response.format({
+            'text/html': function(){
+                Route.findById(request.params.id, function(err, item){
+                    response.render('route',{
+                        head: {
+                            title:'RUNKING'
+                        },
+                        content: {
+                            title: 'route',
+                            description: 'Test',
+                            items: item,
+
+                        }
+                    });
+                });
+            }
+        });
     }
+
 
 });
 
 app.get('/routes',function (req,res) {
-    Route.find({},function(err, routes)
-    {
-        if (err) throw err;
+    if(req.get('content-type') == 'application/json') {
+        Route.find({},function(err, routes)
+        {
+            if (err) throw err;
 
-        console.log(routes);
-        res.json(routes);
-    });
+            console.log(routes);
+            res.json(routes);
+        });
+    }else{
+        res.format({
+            'text/html': function(){
+                Route.find({}, function(err, item){
+                    res.render('routes',{
+                        head: {
+                            title:'RUNKING'
+                        },
+                        content: {
+                            title: 'routes',
+                            description: 'Test',
+                            items: item,
+
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+
+
 });
 
 app.post('/routes', function (request, response) {
@@ -373,25 +438,20 @@ app.post('/routes', function (request, response) {
 
 });
 
-/*User.findByIdAndRemove(4, function(err) {
-    if (err) throw err;
-
-    // we have deleted the user
-    console.log('User deleted!');
-});*/
-
-
-
-
-
-
-
-
 
 app.listen(3000);
 
 
 
+
+
+
+
+
+
+// =================================================================
+// Repository ===================================================
+// =================================================================
 
 
 function UserRepository() {

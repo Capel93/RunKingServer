@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <title>ARaynorDesign Template</title>
+    <meta name="description" content="free website template" />
+    <meta name="keywords" content="enter your keywords here" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/image_slide.js"></script>
+</head>
+
+<body>
+<div id="main">
+    <div id="header">
+        <div id="banner">
+            <div id="welcome">
+                <h1>Runking App</h1>
+            </div><!--close welcome-->
+            <div id="welcome_slogan">
+                <h1>Server service</h1>
+            </div><!--close welcome_slogan-->
+        </div><!--close banner-->
+    </div><!--close header-->
+
+    <div id="menubar">
+        <ul id="menu">
+            <li class="home"><a href="home">Home</a></li>
+            <li><a href="routes">Routes</a></li>
+            <li><a href="users">friends</a></li>
+
+        </ul>
+    </div><!--close menubar-->
+
+    <div id="site_content">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <table class="table table-striped" style="width:100%; text-align:center;">
+                    <thead>
+                    <tr>
+                        <th style="width:20%;"><h2>ID</h2></th>
+                        <th style="width:10%;"><h2>Time</h2></th>
+                        <th style="width:20%;"><h2>Distance</h2></th>
+                        <th style="width:20%;"><h2>Date</h2></th>
+
+
+
+
+                        <th style="width:10%;"></th>
+                    </tr>
+                    </thead>
+                    {{#content.items}}
+                        <tbody>
+                        <tr>
+                            <td><a href="/routes/id/{{_id}}">{{_id}}</a></td>
+                            <td>{{time}}</td>
+                            <td>{{distance}}</td>
+                            <td>{{date}}</td>
+
+
+
+                        </tr>
+                        </tbody>
+                    {{/content.items}}
+                </table>
+                <br/><br/><br/>
+                <hr/>
+
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | <a href="http://www.heartinternet.co.uk/vps/">Virtual Server</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a>
+    </div><!--close footer-->
+</div>
+</body>
+</html>
