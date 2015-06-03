@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title></title>
+</head>
+<body>
+
+<div id="main">
+    <div id="header">
+        <div id="banner">
+            <div id="welcome">
+                <h1>Runking App</h1>
+            </div><!--close welcome-->
+            <div id="welcome_slogan">
+                <h1>Server service</h1>
+            </div><!--close welcome_slogan-->
+        </div><!--close banner-->
+    </div><!--close header-->
+    <div id="menubar">
+        <ul id="menu">
+            <li class="current"><a href="index.html">Home</a></li>
+
+        </ul>
+    </div><!--close menubar-->
+
+    <div id="site_content">
+
+        <div class="sidebar_container">
+            <div class="sidebar">
+                <div class="sidebar_item">
+
+
+                    <h2>LogIN</h2>
+                    <p>Pàgina web de l'aplicació mobil Runking, que et permet veure i modificar les teves rutes i amistats</p>
+                </div><!--close sidebar_item-->
+            </div><!--close sidebar-->
+        </div><!--close sidebar_container-->
+
+
+
+        <div id="contact">
+            <h1>Log In</h1>
+            <form action="/login" method="post">
+                <div>
+                    <label for="username">Name:</label>
+                    <input type="text" id="username" name="username" placeholder="username" />
+                    <p></p>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="email" />
+                    <p></p>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="password"/>
+                    <p></p>
+
+                    <input type="submit" value="LogIN" />
+
+                </div>
+            </form>
+        </div>
+    </div><!--close site_content-->
+
+</div><!--close main-->
+
+</body>
+</html>
